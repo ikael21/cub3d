@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRCS = srcs/test.c
+#SRCS = srcs/test.c
 
 MAIN = srcs/main.c
 
@@ -11,7 +11,7 @@ OBJS_DIR = objs
 MLX = minilibx_macOS/libmlx.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
 MAC_API = -framework OpenGL -framework AppKit
 
 #colors for beauty
