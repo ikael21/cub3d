@@ -53,35 +53,35 @@ typedef struct s_keys
 typedef struct s_player
 {
 	t_keys	keys;
-	double	posx;
-	double	posy;
-	double	angle;
+	double	posx; //парсер
+	double	posy; //парсер
+	double	angle; //парсер
 }	t_player;
 
 /* STRUCT FOR ONE TEXTURE */
 typedef struct s_texture
 {
-	void	*img;
-	char	*path;
-	int		width;
-	int		height;
+	void	*img; //парсер
+	char	*path; //парсер
+	int		width; //парсер
+	int		height; //парсер
 }	t_texture;
 
 /* STRUCT FOR ALL TEXTURES OF WALL */
 typedef struct s_textures
 {
-	t_texture	north;
-	t_texture	south;
-	t_texture	west;
-	t_texture	east;
+	t_texture	north; //парсер
+	t_texture	south; //парсер
+	t_texture	west; //парсер
+	t_texture	east; //парсер
 }	t_textures;
 
 /* STRUCT FOR MAP */
 typedef struct s_map
 {
-	char	**map;
-	int		width;
-	int		height;
+	char	**map; //парсер
+	int		width; //парсер
+	int		height; //парсер
 }	t_map;
 
 /* STRUCT FOR RENDER IMAGE */
@@ -100,9 +100,9 @@ typedef struct s_data
 	void		*win;
 	t_img		img;
 	t_img		next;
-	t_player	player;
-	t_textures 	textures;
-	t_map		map;
+	t_player	player; //парсер
+	t_textures 	textures; //парсер
+	t_map		map; //парсер
 }	t_data;
 
 /* GRAPHIC */
