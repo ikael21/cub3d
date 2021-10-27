@@ -66,5 +66,6 @@ int	render(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->next.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
 	data->img = data->next;
+	usleep(8333);
 	return (1);
 }

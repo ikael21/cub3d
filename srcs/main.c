@@ -12,12 +12,25 @@
 
 #include "cub3d.h"
 
+static void	game_int(t_data *data)
+{
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, W_WIDTH, W_HEIGHT, "cub3d");
+	data->img.img = mlx_new_image(data->mlx, W_WIDTH, W_HEIGHT);
+	data->player.keys.w = 0;
+	data->player.keys.a = 0;
+	data->player.keys.s = 0;
+	data->player.keys.d = 0;
+	data->player.keys.left = 0;
+	data->player.keys.right = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	t_data data;
 
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, W_WIDTH, W_HEIGHT, "cub3d");
+	game_int(&data);
+	/* обрабатывается в парсере от сюда*/
 	data.map.height = 10;
 	data.map.width = 10;
 	data.map.map = (char **)malloc(sizeof(char *) * 11);
@@ -34,14 +47,8 @@ int	main(int argc, char **argv)
 	data.map.map[10] = NULL;
 	data.player.posx = 6 * SIZE + SIZE/2;
 	data.player.posy = 6 * SIZE + SIZE/2;
-	data.player.keys.w = 0;
-	data.player.keys.a = 0;
-	data.player.keys.s = 0;
-	data.player.keys.d = 0;
-	data.player.keys.left = 0;
-	data.player.keys.right = 0;
-	data.player.angle = 270;
-	data.img.img = mlx_new_image(data.mlx, W_WIDTH, W_HEIGHT);
+	data.player.angle = 90;
+	/* до сюда */
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
 	mlx_loop_hook(data.mlx, render, &data);
