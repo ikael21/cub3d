@@ -51,8 +51,6 @@ void draw_player(t_data *data)
 	while (i < 15)
 	{
 		pixel_put(data, (int)(data->player.posx + i * cos(data->player.angle * 3.14 / 180)), (int)(data->player.posy + i * sin(data->player.angle * 3.14 / 180)), 0x000000ff);
-//		x = player_x + c*cos(player_a);
-//		y = player_y + c*sin(player_a).
 		i++;
 	}
 }
