@@ -58,23 +58,23 @@ typedef struct s_player
 	double	angle;
 }	t_player;
 
-/* STRUCT FOR ONE PICTURE */
-typedef struct s_pic
+/* STRUCT FOR ONE TEXTURE */
+typedef struct s_texture
 {
 	void	*img;
 	char	*path;
 	int		width;
 	int		height;
-}	t_pic;
+}	t_texture;
 
-/* STRUCT FOR ALL PICTURES OF WALL */
-typedef struct s_pics
+/* STRUCT FOR ALL TEXTURES OF WALL */
+typedef struct s_textures
 {
-	t_pic	north;
-	t_pic	south;
-	t_pic	west;
-	t_pic	east;
-}	t_pics;
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
+}	t_textures;
 
 /* STRUCT FOR MAP */
 typedef struct s_map
@@ -101,7 +101,7 @@ typedef struct s_data
 	t_img		img;
 	t_img		next;
 	t_player	player;
-	t_pics		pics;
+	t_textures 	textures;
 	t_map		map;
 }	t_data;
 
