@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/26 14:32:21 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/27 15:44:06 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,30 @@
 # include <stdio.h>
 # include <math.h>
 # include "mlx.h"
+# include "get_next_line.h"
+# include "libft.h"
 
 // window size
 # define W_WIDTH 	1024
 # define W_HEIGHT	768
 
 // size of one cell
-#define SIZE 64
+#define SIZE		64
 
 //
-#define ROT_SPEED 1.5
+#define ROT_SPEED	1.5
 
 // keys
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define LEFT 123
-# define RIGHT 124
-# define ESC 53
+# define W			13
+# define A			0
+# define S			1
+# define D			2
+# define LEFT		123
+# define RIGHT		124
+# define ESC		53
+
+# define FAIL		-1
+# define SUCCESS	0
 
 /* STRUCT FOR KEYS */
 typedef struct s_keys
@@ -82,6 +87,8 @@ typedef struct s_map
 	char	**map; //парсер
 	int		width; //парсер
 	int		height; //парсер
+	int		f_color;
+	int		c_color;
 }	t_map;
 
 /* STRUCT FOR RENDER IMAGE */
@@ -110,6 +117,7 @@ int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 /* PARSER */
+int		parser(t_data *data, char *map_path);
 
 /* CONTROL */
 int		key_hook_press(int keycode, void *params);
@@ -122,5 +130,12 @@ void	turn_left(t_data *data);
 void	turn_right(t_data *data);
 void	strafe_left(t_data *data);
 void	strafe_right(t_data *data);
+
+/* UTILS */
+int		ft_strcmp(const char *str1, const char *str2);
+char	**ft_split(char const *s, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(char *str);
+void	free_str_arr(char **str_arr);
 
 #endif
