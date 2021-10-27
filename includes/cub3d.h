@@ -28,6 +28,8 @@
 
 //
 #define ROT_SPEED 1.5
+#define ANGLE 90/W_WIDTH
+#define SCALE 256/100
 
 // keys
 # define W 13
