@@ -1,6 +1,16 @@
 NAME = cub3d
 
-SRCS = srcs/test.c
+SRCS = srcs/control/close_game.c \
+	srcs/control/key_hook.c \
+	srcs/control/strafe_left.c \
+	srcs/control/strafe_right.c \
+	srcs/control/turn_left.c \
+	srcs/control/turn_right.c \
+	srcs/control/walk_forward.c \
+	srcs/control/walk_backward.c \
+	srcs/control/move.c \
+	srcs/graphic/pixel_put.c \
+	srcs/graphic/render.c
 
 MAIN = srcs/main.c
 
@@ -11,7 +21,7 @@ OBJS_DIR = objs
 MLX = minilibx_macOS/libmlx.a
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
 MAC_API = -framework OpenGL -framework AppKit
 
 #colors for beauty
@@ -25,6 +35,7 @@ MAGENTA =	\033[35;1m
 
 all: $(NAME)
 
+
 $(NAME): $(MLX) $(OBJS_DIR) $(OBJS) $(MAIN)
 	@$(CC) $(FLAGS) -Iincludes -Lminilibx_macOS -lmlx $(MAC_API) $(MAIN) $(OBJS) -o $(NAME)
 	@echo "$(MAGENTA)$(NAME) $(GREEN)compiled$(RESET)"
@@ -36,6 +47,8 @@ $(MLX):
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 	@mkdir -p $(OBJS_DIR)/srcs
+	@mkdir -p $(OBJS_DIR)/srcs/control
+	@mkdir -p $(OBJS_DIR)/srcs/graphic
 
 $(OBJS_DIR)/%.o:%.c
 	@$(CC) $(FLAGS) -Iincludes -Iminilibx_macOS -c $< -o $@ -MD
