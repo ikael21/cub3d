@@ -38,9 +38,21 @@
 # define RIGHT 124
 # define ESC 53
 
+/* STRUCT FOR KEYS */
+typedef struct s_keys
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 /* STRUCT FOR PLAYER */
 typedef struct s_player
 {
+	t_keys	keys;
 	double	posx;
 	double	posy;
 	double	angle;
@@ -94,13 +106,15 @@ typedef struct s_data
 }	t_data;
 
 /* GRAPHIC */
-void	render(t_data *data);
+int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 /* PARSER */
 
 /* CONTROL */
-int		key_hook(int keycode, void *params);
+int		key_hook_press(int keycode, void *params);
+int		key_hook_release(int keycode, void *params);
+int		move(t_data *data);
 void	close_game(void);
 void	walk_forward(t_data *data);
 void	walk_backward(t_data *data);

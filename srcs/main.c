@@ -34,9 +34,16 @@ int	main(int argc, char **argv)
 	data.map.map[10] = NULL;
 	data.player.posx = 6 * SIZE + SIZE/2;
 	data.player.posy = 6 * SIZE + SIZE/2;
-//	data.player.angle = 180;
+	data.player.keys.w = 0;
+	data.player.keys.a = 0;
+	data.player.keys.s = 0;
+	data.player.keys.d = 0;
+	data.player.keys.left = 0;
+	data.player.keys.right = 0;
+	data.player.angle = 270;
 	data.img.img = mlx_new_image(data.mlx, W_WIDTH, W_HEIGHT);
-	render(&data);
-	mlx_hook(data.win, 2, 1L<<2, key_hook, &data);
+	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
+	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
+	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
 }

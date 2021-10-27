@@ -49,14 +49,16 @@ void draw_player(t_data *data)
 	}
 }
 
-void	render(t_data *data)
+int	render(t_data *data)
 {
 	data->next.img = mlx_new_image(data->mlx, W_WIDTH, W_HEIGHT);
 	data->next.addr = mlx_get_data_addr(data->next.img, &data->next.bits_per_pixel, &data->next.line_length,
 										&data->next.endian);
+	move(data);
 	printmap(data);
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->next.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
 	data->img = data->next;
+	return (1);
 }
