@@ -27,7 +27,7 @@
 #define SIZE 64
 
 //
-#define ROT_SPEED 6
+#define ROT_SPEED 1.5
 
 // keys
 # define W 13

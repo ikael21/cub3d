@@ -36,15 +36,23 @@ void	printmap(t_data *data)
 
 void draw_player(t_data *data)
 {
-	int i = (int)data->player.posy - 1;
-	while (i < (int)data->player.posy + 1)
+	int i = (int)data->player.posy - 2;
+	while (i < (int)data->player.posy + 2)
 	{
-		int j = (int)data->player.posx - 1;
-		while (j < (int)data->player.posx + 1)
+		int j = (int)data->player.posx - 2;
+		while (j < (int)data->player.posx + 2)
 		{
 			pixel_put(data, j, i, 0x00ff0000);
 			j++;
 		}
+		i++;
+	}
+	i = 2;
+	while (i < 15)
+	{
+		pixel_put(data, (int)(data->player.posx + i * cos(data->player.angle * 3.14 / 180)), (int)(data->player.posy + i * sin(data->player.angle * 3.14 / 180)), 0x000000ff);
+//		x = player_x + c*cos(player_a);
+//		y = player_y + c*sin(player_a).
 		i++;
 	}
 }
