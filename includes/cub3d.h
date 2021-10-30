@@ -26,10 +26,15 @@
 # define W_HEIGHT	768
 
 // size of one cell
-#define SIZE		64
+#define SIZE		256
 
 //
-#define ROT_SPEED	1.5
+#define ROT_SPEED 2
+#define WALK_SPEED 1
+#define FOW 66.0
+#define H_FOW FOW/2
+#define DELTA_A FOW/W_WIDTH
+#define FOCUS (W_WIDTH/2)*tan(dtr(H_FOW))
 
 // keys
 # define W			13
@@ -114,6 +119,7 @@ typedef struct s_data
 }	t_data;
 
 /* GRAPHIC */
+double	dtr(double degree);
 int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 

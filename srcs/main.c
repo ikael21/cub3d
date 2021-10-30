@@ -48,19 +48,29 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (usage());
 	game_int(&data);
-
-	parser_res = parser(&data, argv[1]);
-	printf("parsing result: ");
-	(parser_res == FAIL) ? printf("FAIL\n") : printf("SUCCESS\n");
-	printf("f-color: %X\n", data.map.f_color);
-	printf("c-color: %X\n", data.map.c_color);
-	printf("no_texture: %p  %s\n", data.textures.north.img, data.textures.north.path);
-	printf("so_texture: %p  %s\n", data.textures.south.img, data.textures.south.path);
-	printf("ea_texture: %p  %s\n", data.textures.east.img, data.textures.east.path);
-	printf("we_texture: %p  %s\n", data.textures.west.img, data.textures.west.path);
-
-	// mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
-	// mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
-	// mlx_loop_hook(data.mlx, render, &data);
-	// mlx_loop(data.mlx);
+  if (parser(&data, argv[1]) == FAIL);
+    return (1);
+	/* обрабатывается в парсере от сюда*/
+	data.map.height = 10;
+	data.map.width = 10;
+	data.map.map = (char **)malloc(sizeof(char *) * 11);
+	data.map.map[0] = "1111111111";
+	data.map.map[1] = "1000000001";
+	data.map.map[2] = "1011111101";
+	data.map.map[3] = "1010000101";
+	data.map.map[4] = "1010110101";
+	data.map.map[5] = "1010100101";
+	data.map.map[6] = "101010N101";
+	data.map.map[7] = "1010111101";
+	data.map.map[8] = "1010000001";
+	data.map.map[9] = "1111111111";
+	data.map.map[10] = NULL;
+	data.player.posx = 6 * SIZE + SIZE/2;
+	data.player.posy = 6 * SIZE + SIZE/2;
+	data.player.angle = dtr(270);
+	/* до сюда */
+	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
+	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
+	mlx_loop_hook(data.mlx, render, &data);
+	mlx_loop(data.mlx);
 }

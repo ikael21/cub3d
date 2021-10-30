@@ -1,58 +1,59 @@
 #include "cub3d.h"
 
-void	printcube(t_data *data, int x, int y, char type)
+void	put_line(t_data *data, int line, double distance, double angle)
 {
-	if (type == 'R')
+	int	height;
+	int	start;
+	int end;
+
+	distance *= cos(data->player.angle - angle);
+	height = (int)((double)FOCUS * SIZE / distance);
+	start = (W_HEIGHT - height) / 2;
+	end = start + height;
+	while (start < end)
 	{
-		int i = y * SIZE;
-		while (i < y * SIZE + SIZE)
+		if (start >= 0 && start < W_HEIGHT && line > 0 && line < W_WIDTH)
+			pixel_put(data, line, start, 0x000000ff);
+		start++;
+	}
+}
+
+void	raycasting(t_data *data)
+{
+	double	i;
+	double	x;
+	double	y;
+	double	j;
+	int		k;
+
+	i = data->player.angle - dtr(H_FOW);
+	k = 0;
+	while (i < data->player.angle + dtr(H_FOW))
+	{
+		j = 1;
+		while (j < W_WIDTH)
 		{
-			int j = x * SIZE;
-			while (j < x * SIZE + SIZE)
+			x = data->player.posx + j * cos(i);
+			y = data->player.posy + j * sin(i);
+			if (((int)y / SIZE >= 0 && (int)y / SIZE < data->map.height) && ((int)x / SIZE >= 0 && (int)x / SIZE < data->map.width) && data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
 			{
-				pixel_put(data, j, i, 0xffffff);
-				j++;
+				put_line(data, k, j, i);
+				break;
 			}
-			i++;
+//			if ((x >= 0 && x < W_WIDTH) && (y >= 0 && y < W_HEIGHT))
+//				pixel_put(data, (int)x, (int)y, 0x000000ff);
+//			if (data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
+//				break;
+			j+=1.0;
 		}
+		k++;
+		i+=dtr(DELTA_A);
 	}
 }
 
-void	printmap(t_data *data)
+void drawing(t_data *data)
 {
-	int i = 0;
-	while (i < data->map.height)
-	{
-		int j = 0;
-		while (j < data->map.width)
-		{
-			if (data->map.map[i][j] == '1')
-				printcube(data, j, i, 'R');
-			j++;
-		}
-		i++;
-	}
-}
-
-void draw_player(t_data *data)
-{
-	int i = (int)data->player.posy - 2;
-	while (i < (int)data->player.posy + 2)
-	{
-		int j = (int)data->player.posx - 2;
-		while (j < (int)data->player.posx + 2)
-		{
-			pixel_put(data, j, i, 0x00ff0000);
-			j++;
-		}
-		i++;
-	}
-	i = 2;
-	while (i < 15)
-	{
-		pixel_put(data, (int)(data->player.posx + i * cos(data->player.angle * 3.14 / 180)), (int)(data->player.posy + i * sin(data->player.angle * 3.14 / 180)), 0x000000ff);
-		i++;
-	}
+	raycasting(data);
 }
 
 int	render(t_data *data)
@@ -61,8 +62,7 @@ int	render(t_data *data)
 	data->next.addr = mlx_get_data_addr(data->next.img, &data->next.bits_per_pixel, &data->next.line_length,
 										&data->next.endian);
 	move(data);
-	printmap(data);
-	draw_player(data);
+	drawing(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->next.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.img);
 	data->img = data->next;
