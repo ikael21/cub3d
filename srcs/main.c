@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/26 14:54:56 by lvallie          ###   ########.fr       */
+/*   Updated: 2021/10/29 13:33:59 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,33 @@ static void	game_int(t_data *data)
 	data->player.keys.d = 0;
 	data->player.keys.left = 0;
 	data->player.keys.right = 0;
+	data->textures.east.img = NULL;
+	data->textures.west.img = NULL;
+	data->textures.north.img = NULL;
+	data->textures.south.img = NULL;
+	data->map.f_color = -1;
+	data->map.c_color = -1;
+	data->map.map = NULL;
+}
+
+static int	usage(void)
+{
+	/*
+		print how to use the binary
+	*/
+	return (EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
+	int		parser_res;
 
+	if (argc != 2)
+		return (usage());
 	game_int(&data);
+  if (parser(&data, argv[1]) == FAIL);
+    return (1);
 	/* обрабатывается в парсере от сюда*/
 	data.map.height = 10;
 	data.map.width = 10;

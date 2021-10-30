@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/26 14:32:21 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/28 13:46:59 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@
 # include <stdio.h>
 # include <math.h>
 # include "mlx.h"
+# include "get_next_line.h"
+# include "libft.h"
 
 // window size
 # define W_WIDTH 	1024
 # define W_HEIGHT	768
 
 // size of one cell
-#define SIZE 64
+#define SIZE		256
 
 //
 #define ROT_SPEED 2
@@ -35,13 +37,16 @@
 #define FOCUS (W_WIDTH/2)*tan(dtr(H_FOW))
 
 // keys
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define LEFT 123
-# define RIGHT 124
-# define ESC 53
+# define W			13
+# define A			0
+# define S			1
+# define D			2
+# define LEFT		123
+# define RIGHT		124
+# define ESC		53
+
+# define FAIL		-1
+# define SUCCESS	0
 
 /* STRUCT FOR KEYS */
 typedef struct s_keys
@@ -60,7 +65,8 @@ typedef struct s_player
 	t_keys	keys;
 	double	posx; //парсер
 	double	posy; //парсер
-	double	angle; //парсер
+	double	angle;
+	char	direct_view;
 }	t_player;
 
 /* STRUCT FOR ONE TEXTURE */
@@ -87,6 +93,8 @@ typedef struct s_map
 	char	**map; //парсер
 	int		width; //парсер
 	int		height; //парсер
+	int		f_color;
+	int		c_color;
 }	t_map;
 
 /* STRUCT FOR RENDER IMAGE */
@@ -116,6 +124,8 @@ int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 /* PARSER */
+int		parser(t_data *data, char *map_path);
+int		parse_identifiers(t_data *data, char **ln_prt);
 
 /* CONTROL */
 int		key_hook_press(int keycode, void *params);
@@ -128,5 +138,9 @@ void	turn_left(t_data *data);
 void	turn_right(t_data *data);
 void	strafe_left(t_data *data);
 void	strafe_right(t_data *data);
+
+/* UTILS */
+void	free_str_arr(char **str_arr);
+int		rgb_to_hex(int red, int green, int blue);
 
 #endif
