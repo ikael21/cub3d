@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 18:30:27 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/27 16:17:19 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/29 13:08:50 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int	ft_atoi(const char *str)
 			return (-1);
 		i++;
 	}
+	if (str[i] && (str[i] < 48 || str[i] > 57))
+		return (-1);
 	return (result * isminus);
 }

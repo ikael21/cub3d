@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 SRCS =	srcs/control/close_game.c		srcs/control/turn_right.c\
 		srcs/control/key_hook.c			srcs/control/strafe_left.c\
@@ -7,9 +7,8 @@ SRCS =	srcs/control/close_game.c		srcs/control/turn_right.c\
 		srcs/control/move.c				srcs/graphic/pixel_put.c\
 		srcs/graphic/render.c			srcs/parser/parser.c\
 		srcs/gnl/get_next_line_utils.c	srcs/gnl/get_next_line.c\
-		srcs/utils/ft_strcmp.c			srcs/utils/ft_split.c\
-		srcs/utils/ft_substr.c			srcs/utils/free_str_arr.c\
-		srcs/utils/ft_strlen.c
+		srcs/utils/free_str_arr.c		srcs/utils/rbg_to_hex.c\
+		srcs/parser/parse_identifiers.c
 
 MAIN = srcs/main.c
 
@@ -37,12 +36,11 @@ MAGENTA =	\033[35;1m
 all: $(NAME)
 
 $(NAME): $(MLX) $(LIBFT) $(OBJS_DIR) $(OBJS) $(MAIN)
-	@$(CC) $(FLAGS) -Iincludes -Lminilibx_macOS -lmlx $(MAC_API) $(MAIN) $(OBJS) -o $(NAME)
-	@echo "$(MAGENTA)$(NAME) $(GREEN)compiled$(RESET)"
+	@$(CC) $(FLAGS) -Iincludes -Lminilibx_macOS -lmlx $(MAC_API) $(MAIN) $(OBJS) $(LIBFT) -o $(NAME)
+	@echo "\n$(MAGENTA)$(NAME) $(GREEN)compiled$(RESET)"
 
 $(LIBFT):
 	@make -C srcs/libft
-	@echo "$(MAGENTA)libft.a $(GREEN)ready$(RESET)"
 
 $(MLX):
 	@make -C minilibx_macOS
@@ -59,7 +57,7 @@ $(OBJS_DIR):
 
 $(OBJS_DIR)/%.o:%.c
 	@$(CC) $(FLAGS) -Iincludes -Iminilibx_macOS -c $< -o $@ -MD
-	@echo "$(YELLOW)objs $(GREEN)ready$(RESET)"
+	@printf "$(RED)>> $(YELLOW)[$@]$(GREEN)$(RESET)\r"
 
 include $(wildcard $(D_FILES))
 
@@ -68,7 +66,6 @@ clean:
 	@make clean -C minilibx_macOS
 	@make fclean -C srcs/libft
 	@echo "$(MAGENTA)libmlx.a $(RED)deleted$(RESET)"
-	@echo "$(MAGENTA)libft.a $(RED)deleted$(RESET)"
 	@echo "$(YELLOW)objs $(RED)deleted$(RESET)"
 
 fclean: clean

@@ -7,6 +7,7 @@ GREEN =		\033[32;1m
 RESET =		\033[0m
 BLUE =		\033[34;1m
 RED = 		\033[31;1m
+YELLOW =	\033[33;1m
 
 FUNCS =		ft_bzero.c		ft_isalnum.c	ft_toupper.c\
 			ft_isalpha.c	ft_isdigit.c	ft_isprint.c\
@@ -19,10 +20,10 @@ FUNCS =		ft_bzero.c		ft_isalnum.c	ft_toupper.c\
 			ft_strrchr.c	ft_strlcpy.c	ft_strlcat.c\
 			ft_substr.c		ft_strjoin.c	ft_strtrim.c\
 			ft_itoa.c		ft_putnbr_fd.c	ft_split.c\
-			ft_strmapi.c	ft_lstnew.c		ft_lstadd_front.c\
+			ft_strmapi.c	ft_lstnew.c		ft_strcmp.c\
 			ft_lstsize.c	ft_lstlast.c	ft_lstadd_back.c\
 			ft_lstdelone.c	ft_lstclear.c	ft_lstiter.c\
-			ft_lstmap.c		ft_strcmp.c
+			ft_lstmap.c		ft_lstadd_front.c
 
 O_OBJS = $(patsubst %.c,$(OBJS_DIR)/%.o, $(FUNCS))
 D_FILES = $(patsubst %.c,$(OBJS_DIR)/%.d, $(FUNCS))
@@ -33,13 +34,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(O_OBJS)
 	@ar rcs $(NAME) $(O_OBJS)
-	@echo "$(BLUE)LIBFT$(RESET) $(GREEN)COMPILED!$(RESET)"
+	@echo "\n$(BLUE)$(NAME)$(RESET) $(GREEN)ready$(RESET)"
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o:%.c
 	@gcc $(FLAGS) -I../../includes -c $< -o $@ -MD
+	@printf "$(RED)>> $(YELLOW)[$@]$(RESET)\r"
 
 include $(wildcard $(D_FILES))
 
@@ -48,7 +50,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(BLUE)LIBFT$(RESET) $(RED)DELETED$(RESET)"
+	@echo "$(BLUE)$(NAME)$(RESET) $(RED)deleted$(RESET)"
 
 re: fclean all
 

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   rbg_to_hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 15:11:19 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/27 15:11:59 by ikael            ###   ########.fr       */
+/*   Created: 2021/10/28 12:01:14 by ikael             #+#    #+#             */
+/*   Updated: 2021/10/28 12:01:31 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	ft_strlen(char *str)
+int	rgb_to_hex(int red, int green, int blue)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	return ((((red * 256) + green) * 256) + blue);
 }
