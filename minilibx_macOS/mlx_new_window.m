@@ -335,7 +335,7 @@ int get_mouse_button(NSEventType eventtype)
 }
 @end
 
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 @implementation MlxWin
 
 - (id) initWithRect: (NSRect)rect andTitle: (NSString *)title pfaAttrs: (NSOpenGLPixelFormatAttribute *)attrs
