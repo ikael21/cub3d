@@ -8,7 +8,7 @@ SRCS =	srcs/control/close_game.c		srcs/control/turn_right.c\
 		srcs/graphic/render.c			srcs/parser/parser.c\
 		srcs/gnl/get_next_line_utils.c	srcs/gnl/get_next_line.c\
 		srcs/utils/free_str_arr.c		srcs/utils/rbg_to_hex.c\
-		srcs/parser/parse_identifiers.c
+		srcs/parser/parse_identifiers.c	srcs/graphic/dtr.c
 
 MAIN = srcs/main.c
 

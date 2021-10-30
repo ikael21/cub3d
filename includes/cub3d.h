@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/28 13:46:59 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/30 21:51:09 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 //
 #define ROT_SPEED 2
-#define WALK_SPEED 1
+#define WALK_SPEED 10
 #define FOW 66.0
 #define H_FOW FOW/2
 #define DELTA_A FOW/W_WIDTH

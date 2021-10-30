@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/29 13:33:59 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/30 21:52:52 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int	main(int argc, char **argv)
 	t_data	data;
 	int		parser_res;
 
-	if (argc != 2)
-		return (usage());
+	// if (argc != 2)
+	// 	return (usage());
 	game_int(&data);
-  if (parser(&data, argv[1]) == FAIL);
-    return (1);
+	if (parser(&data, argv[1]) == FAIL)
+		return (1);
 	/* обрабатывается в парсере от сюда*/
 	data.map.height = 10;
 	data.map.width = 10;

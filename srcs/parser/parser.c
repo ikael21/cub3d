@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:27:23 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/29 20:26:57 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/30 22:02:56 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ static int	parse_line(t_data *data, char *line)
 	ln_prt = ft_split(line, ' ');
 	if (!ln_prt)
 		return (FAIL);
+	/*
+		когда ln_prt[0] - обработать
+	*/
 	if (!ft_strcmp(ln_prt[0], "NO") || !ft_strcmp(ln_prt[0], "SO")
 		|| !ft_strcmp(ln_prt[0], "WE") || !ft_strcmp(ln_prt[0], "EA")
 		|| !ft_strcmp(ln_prt[0], "F") || !ft_strcmp(ln_prt[0], "C"))
 		ret = parse_identifiers(data, ln_prt);
-	else
-		ret = get_map_line(data, line);
+	// else
+	// 	ret = get_map_line(data, line);
 	free_str_arr(ln_prt);
 	free(line);
 	return (ret);
