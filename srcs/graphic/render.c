@@ -1,48 +1,59 @@
 #include "cub3d.h"
 
-void	put_line(t_data *data, int j, double i, double angle)
+void	put_line(t_data *data, int line, double distance, double angle)
 {
-	double	height;
-	double	start;
-	double	k;
+	int	height;
+	int	start;
+	int end;
 
-	height = (W_HEIGHT - (double)i * SCALE);
+	distance *= cos(data->player.angle - angle);
+	height = (int)((double)FOCUS * SIZE / distance);
 	start = (W_HEIGHT - height) / 2;
-	k = start;
-	while (k < start + height)
+	end = start + height;
+	while (start < end)
 	{
-		pixel_put(data, j, (int)k, 0x000000ff);
+		if (start >= 0 && start < W_HEIGHT && line > 0 && line < W_WIDTH)
+			pixel_put(data, line, start, 0x000000ff);
+		start++;
+	}
+}
+
+void	raycasting(t_data *data)
+{
+	double	i;
+	double	x;
+	double	y;
+	double	j;
+	int		k;
+
+	i = data->player.angle - dtr(H_FOW);
+	k = 0;
+	while (i < data->player.angle + dtr(H_FOW))
+	{
+		j = 1;
+		while (j < W_WIDTH)
+		{
+			x = data->player.posx + j * cos(i);
+			y = data->player.posy + j * sin(i);
+			if (((int)y / SIZE >= 0 && (int)y / SIZE < data->map.height) && ((int)x / SIZE >= 0 && (int)x / SIZE < data->map.width) && data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
+			{
+				put_line(data, k, j, i);
+				break;
+			}
+//			if ((x >= 0 && x < W_WIDTH) && (y >= 0 && y < W_HEIGHT))
+//				pixel_put(data, (int)x, (int)y, 0x000000ff);
+//			if (data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
+//				break;
+			j+=1.0;
+		}
 		k++;
+		i+=dtr(DELTA_A);
 	}
 }
 
 void drawing(t_data *data)
 {
-	double	x;
-	double	y;
-	double 	i;
-	double	angle;
-	int		j;
-
-	j = 0;
-	while (j < W_WIDTH)
-	{
-		i = 2;
-		while (i < 256)
-		{
-			angle = (double)j * ANGLE - 45;
-			x = data->player.posx + i * cos((data->player.angle + angle) * 3.14 / 180);
-			y = data->player.posy + i * sin((data->player.angle + angle) * 3.14 / 180);
-//			pixel_put(data, (int)x, (int)y, 0x00000099);
-			if (data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
-			{
-				put_line(data, j, i, angle);
-				break;
-			}
-			i+=1.0;
-		}
-		j++;
-	}
+	raycasting(data);
 }
 
 int	render(t_data *data)

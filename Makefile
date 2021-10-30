@@ -10,7 +10,8 @@ SRCS = srcs/control/close_game.c \
 	srcs/control/walk_backward.c \
 	srcs/control/move.c \
 	srcs/graphic/pixel_put.c \
-	srcs/graphic/render.c
+	srcs/graphic/render.c \
+	srcs/graphic/dtr.c
 
 MAIN = srcs/main.c
 

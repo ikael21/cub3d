@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	data.map.map[10] = NULL;
 	data.player.posx = 6 * SIZE + SIZE/2;
 	data.player.posy = 6 * SIZE + SIZE/2;
-	data.player.angle = 270;
+	data.player.angle = dtr(270);
 	/* до сюда */
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);

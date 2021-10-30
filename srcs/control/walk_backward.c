@@ -2,6 +2,6 @@
 
 void	walk_backward(t_data *data)
 {
-	data->player.posx += (cos((data->player.angle + 180) * 3.14 / 180));
-	data->player.posy += (sin((data->player.angle + 180) * 3.14 / 180));
+	data->player.posx -= WALK_SPEED * cos(data->player.angle);
+	data->player.posy -= WALK_SPEED * sin(data->player.angle);
 }
