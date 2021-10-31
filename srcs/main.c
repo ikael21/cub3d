@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/30 21:42:51 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/31 20:14:40 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	game_int(&data);
 
 	printf("parsing result: ");
-	(parser(&data, argv[1]) == FAIL) ? printf("FAIL\n") : printf("SUCCESS\n");
+	(get_map_identifiers(&data, argv[1]) == FAIL) ? printf("FAIL\n") : printf("SUCCESS\n");
 	printf("f-color: %X\n", data.map.f_color);
 	printf("c-color: %X\n", data.map.c_color);
 	printf("no_texture: %p  %s\n", data.textures.north.img, data.textures.north.path);

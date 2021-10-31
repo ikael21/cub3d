@@ -8,7 +8,7 @@ SRCS =	srcs/control/close_game.c		srcs/control/turn_right.c\
 		srcs/graphic/render.c			srcs/parser/parser.c\
 		srcs/gnl/get_next_line_utils.c	srcs/gnl/get_next_line.c\
 		srcs/utils/free_str_arr.c		srcs/utils/rbg_to_hex.c\
-		srcs/parser/parse_identifiers.c
+		srcs/parser/parse_identifiers.c	srcs/utils/is_map_started.c
 
 MAIN = srcs/main.c
 
@@ -21,7 +21,7 @@ OBJS_DIR = objs
 MLX = minilibx_macOS/libmlx.a
 
 CC = gcc
-#FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 MAC_API = -framework OpenGL -framework AppKit
 
 #colors for beauty
@@ -30,6 +30,8 @@ RESET =		\033[0m
 RED =		\033[31;1m
 GREEN =		\033[32;1m
 MAGENTA =	\033[35;1m
+
+ERASE = \33[2K
 
 .PHONY: all clean fclean re
 
@@ -57,7 +59,7 @@ $(OBJS_DIR):
 
 $(OBJS_DIR)/%.o:%.c
 	@$(CC) $(FLAGS) -Iincludes -Iminilibx_macOS -c $< -o $@ -MD
-	@printf "$(RED)>> $(YELLOW)[$@]$(GREEN)$(RESET)\r"
+	@printf "$(ERASE)$(RED)>> $(YELLOW)[$@]$(GREEN)$(RESET)\r"
 
 include $(wildcard $(D_FILES))
 

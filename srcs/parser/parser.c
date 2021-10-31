@@ -6,13 +6,13 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:27:23 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/30 21:32:16 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/31 20:30:22 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_format(char *map_path)
+static int	check_format(const char *map_path)
 {
 	size_t	len;
 
@@ -21,61 +21,68 @@ static int	check_format(char *map_path)
 		len--;
 	while (len && map_path[len] != '.')
 		len--;
-	if (ft_strcmp(map_path + len + 1, "cub") != 0)
-		return (FAIL);
-	return (SUCCESS);
+	if (!ft_strcmp(map_path + len + 1, "cub"))
+		return (SUCCESS);
+	return (FAIL);
 }
 
-static int	parse_line(t_data *data, char *line)
+static int	get_one_id(t_data *data, char *line)
 {
-	char	**ln_prt;
+	char	**ln_parts;
 	int		ret;
 
-	ret = FAIL;
-	ln_prt = ft_split(line, ' ');
-	if (!ln_prt)
+	ln_parts = ft_split(line, ' ');
+	if (!ln_parts)
 		return (FAIL);
-	if (!ft_strcmp(ln_prt[0], "NO") || !ft_strcmp(ln_prt[0], "SO")
-		|| !ft_strcmp(ln_prt[0], "WE") || !ft_strcmp(ln_prt[0], "EA")
-		|| !ft_strcmp(ln_prt[0], "F") || !ft_strcmp(ln_prt[0], "C"))
-		ret = parse_identifiers(data, ln_prt);
-	// else
-	// 	ret = get_map_line(data, line);
-	free_str_arr(ln_prt);
+	ret = parse_identifiers(data, ln_parts);
+	printf("\nline: |%s| ret: %d\n", line, ret);
+	free_str_arr(ln_parts);
+	return (ret);
+}
+
+static int	read_from_file(t_data *data, int map_fd)
+{
+	char	*line;
+	int		ret;
+
+	ret = get_next_line(map_fd, &line);
+	if (ret == -1)
+		return (FAIL);
+	while (ret > 0 && !is_map_started(line))
+	{
+		if (ft_strcmp(line, "") != 0)
+		{
+			ret = get_one_id(data, line);
+			free(line);
+			if (ret == FAIL)
+				return (FAIL);
+		}
+		else
+			free(line);
+		ret = get_next_line(map_fd, &line);
+	}
+	if (ret == FAIL)
+		return (FAIL);
+	if (ft_strcmp(line, "") != 0 && !is_map_started(line))
+		ret = get_one_id(data, line);
 	free(line);
 	return (ret);
 }
 
-static int	read_map_data(t_data *data, int map_fd)
+int	get_map_identifiers(t_data *data, const char *map_path)
 {
-	char	*line;
-	int		gnl_ret;
+	int	map_fd;
+	int	ret;
 
-	gnl_ret = get_next_line(map_fd, &line);
-	while (gnl_ret && gnl_ret != -1)
-	{
-		if (parse_line(data, line) == FAIL)
-			return (FAIL);
-		gnl_ret = get_next_line(map_fd, &line);
-	}
-	if (gnl_ret == -1 || !data->textures.east.img || !data->textures.west.img
-		|| !data->textures.south.img || !data->textures.north.img
-		|| data->map.f_color == -1 || data->map.c_color == -1)
-		return (FAIL);
-	return (SUCCESS);
-}
-
-int	parser(t_data *data, char *map_path)
-{
-	int		map_fd;
-	int		ret;
-
-	if (check_format(map_path))
+	if (check_format(map_path) == FAIL)
 		return (FAIL);
 	map_fd = open(map_path, O_RDONLY);
-	if (map_fd == -1)
-		return (FAIL);
-	ret = read_map_data(data, map_fd);
+	ret = read_from_file(data, map_fd);
 	close(map_fd);
-	return (ret);
+	if (ret == FAIL || !data->textures.east.img
+		|| !data->textures.west.img || !data->textures.north.img
+		|| !data->textures.south.img || data->map.c_color == -1
+		|| data->map.f_color == -1)
+		return (FAIL);
+	return (SUCCESS);
 }

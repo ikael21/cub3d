@@ -9,6 +9,8 @@ BLUE =		\033[34;1m
 RED = 		\033[31;1m
 YELLOW =	\033[33;1m
 
+ERASE = \33[2K
+
 FUNCS =		ft_bzero.c		ft_isalnum.c	ft_toupper.c\
 			ft_isalpha.c	ft_isdigit.c	ft_isprint.c\
 			ft_memccpy.c	ft_memchr.c		ft_memcmp.c\
@@ -41,7 +43,7 @@ $(OBJS_DIR):
 
 $(OBJS_DIR)/%.o:%.c
 	@gcc $(FLAGS) -I../../includes -c $< -o $@ -MD
-	@printf "$(RED)>> $(YELLOW)[$@]$(RESET)\r"
+	@printf "$(ERASE)$(RED)>> $(YELLOW)[$@]$(RESET)\r"
 
 include $(wildcard $(D_FILES))
 

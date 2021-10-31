@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/28 13:46:59 by ikael            ###   ########.fr       */
+/*   Updated: 2021/10/31 20:14:33 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 /* PARSER */
-int		parser(t_data *data, char *map_path);
+int		get_map_identifiers(t_data *data, const char *map_path);
 int		parse_identifiers(t_data *data, char **ln_prt);
 
 /* CONTROL */
@@ -136,5 +136,6 @@ void	strafe_right(t_data *data);
 /* UTILS */
 void	free_str_arr(char **str_arr);
 int		rgb_to_hex(int red, int green, int blue);
+int		is_map_started(char *line);
 
 #endif
