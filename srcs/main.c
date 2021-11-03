@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 19:53:56 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/03 19:56:03 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	// if (argc != 2)
-	// 	return (usage());
+	if (argc != 2)
+		return (usage());
 	game_int(&data);
 
 	if (get_map_identifiers(&data, argv[1]) == FAIL)
