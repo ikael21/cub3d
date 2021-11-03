@@ -31,7 +31,7 @@ void	raycasting(t_data *data)
 	while (i < data->player.angle + dtr(H_FOW))
 	{
 		j = 1;
-		while (j < W_WIDTH)
+		while (j < 1024)
 		{
 			x = data->player.posx + j * cos(i);
 			y = data->player.posy + j * sin(i);
@@ -40,10 +40,6 @@ void	raycasting(t_data *data)
 				put_line(data, k, j, i);
 				break;
 			}
-//			if ((x >= 0 && x < W_WIDTH) && (y >= 0 && y < W_HEIGHT))
-//				pixel_put(data, (int)x, (int)y, 0x000000ff);
-//			if (data->map.map[(int)y / SIZE][(int)x / SIZE] == '1')
-//				break;
 			j+=1.0;
 		}
 		k++;
@@ -51,8 +47,30 @@ void	raycasting(t_data *data)
 	}
 }
 
+void draw_floor_and_cell(t_data *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < W_HEIGHT/2)
+	{
+		j = -1;
+		while (++j < W_WIDTH)
+			pixel_put(data, j, i, data->map.c_color);
+	}
+	i = W_HEIGHT/2 - 1;
+	while (++i < W_HEIGHT)
+	{
+		j = -1;
+		while (++j < W_WIDTH)
+			pixel_put(data, j, i, data->map.f_color);
+	}
+}
+
 void drawing(t_data *data)
 {
+	draw_floor_and_cell(data);
 	raycasting(data);
 }
 

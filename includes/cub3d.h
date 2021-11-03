@@ -20,13 +20,13 @@
 # include "mlx.h"
 # include "get_next_line.h"
 # include "libft.h"
-
+//# define DEBUG
 // window size
-# define W_WIDTH 	1024
-# define W_HEIGHT	768
+# define W_WIDTH 	800
+# define W_HEIGHT	600
 
 // size of one cell
-#define SIZE		256
+#define SIZE		128
 
 //
 #define ROT_SPEED 2
