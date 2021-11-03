@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 19:50:20 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/03 21:07:57 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include "mlx.h"
 # include "get_next_line.h"
 # include "libft.h"
+
+//colors for beauty
+# define YELLOW		"\033[33;1m"
+# define RESET		"\033[0m"
+# define RED		"\033[31;1m"
+# define GREEN		"\033[32;1m"
+# define MAGENTA	"\033[35;1m"
 
 // window size
 # define W_WIDTH 	1024
