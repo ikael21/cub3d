@@ -45,6 +45,7 @@ static int	get_texture(void *mlx,
 		return (FAIL);
 	texture->img = mlx_xpm_file_to_image(mlx, texture_path,
 			&texture->width, &texture->height);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp, &texture->ll, &texture->end);
 	if (!texture->img)
 		return (FAIL);
 	return (SUCCESS);

@@ -64,32 +64,10 @@ int	main(int argc, char **argv)
 
 	if (get_map_identifiers(&data, argv[1]) == FAIL)
 		return (EXIT_SUCCESS);
-#ifdef DEBUG
-	printf("f-color: %X\n", data.map.f_color);
-	printf("c-color: %X\n", data.map.c_color);
-	printf("no_texture: %p\n", data.textures.north.img);
-	printf("so_texture: %p\n", data.textures.south.img);
-	printf("ea_texture: %p\n", data.textures.east.img);
-	printf("we_texture: %p\n", data.textures.west.img);
-#endif
 
 	if (get_map(&data, argv[1]) == FAIL)
 		return (EXIT_SUCCESS);
 
-#ifdef DEBUG
-	char **tmp;
-	int	i = -1;
-	tmp = data.map.map;
-	printf("%10s\n", "MAP");
-	if (tmp) {
-		printf("width: %d    height: %d\n", data.map.width,
-			data.map.height);
-		while (tmp[++i])
-			printf("|%s|\n", tmp[i]);
-		printf("posx: %f\nposy: %f\npl_direction: %c\n", data.player.posx,
-			data.player.posy, data.player.direct_view);
-	}
-#endif
 	player_set(&data);
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);

@@ -75,6 +75,10 @@ typedef struct s_texture
 	void	*img; //парсер
 	int		width; //парсер
 	int		height; //парсер
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		end;
 }	t_texture;
 
 /* STRUCT FOR ALL TEXTURES OF WALL */
@@ -105,11 +109,27 @@ typedef struct	s_img {
 	int		endian;
 }	t_img;
 
+/* STRUCT FOR RAY */
+typedef struct s_ray
+{
+	double		x;
+	double		y;
+	double		distance;
+	double		angle;
+	int			number;
+	int			height;
+	int			start;
+	int			end;
+	double		scale;
+	t_texture	texture;
+}	t_ray;
+
 /* MAIN STRUCT */
 typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
+	t_ray		ray;
 	t_img		img;
 	t_img		next;
 	t_player	player; //парсер
