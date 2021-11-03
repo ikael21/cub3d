@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/30 21:52:52 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/03 19:53:56 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,39 @@ static int	usage(void)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	int		parser_res;
 
 	// if (argc != 2)
 	// 	return (usage());
 	game_int(&data);
-	if (parser(&data, argv[1]) == FAIL)
-		return (1);
-	/* обрабатывается в парсере от сюда*/
-	data.map.height = 10;
-	data.map.width = 10;
-	data.map.map = (char **)malloc(sizeof(char *) * 11);
-	data.map.map[0] = "1111111111";
-	data.map.map[1] = "1000000001";
-	data.map.map[2] = "1011111101";
-	data.map.map[3] = "1010000101";
-	data.map.map[4] = "1010110101";
-	data.map.map[5] = "1010100101";
-	data.map.map[6] = "101010N101";
-	data.map.map[7] = "1010111101";
-	data.map.map[8] = "1010000001";
-	data.map.map[9] = "1111111111";
-	data.map.map[10] = NULL;
-	data.player.posx = 6 * SIZE + SIZE/2;
-	data.player.posy = 6 * SIZE + SIZE/2;
-	data.player.angle = dtr(270);
-	/* до сюда */
+
+	if (get_map_identifiers(&data, argv[1]) == FAIL)
+		return (EXIT_SUCCESS);
+#ifdef DEBUG
+	printf("f-color: %X\n", data.map.f_color);
+	printf("c-color: %X\n", data.map.c_color);
+	printf("no_texture: %p\n", data.textures.north.img);
+	printf("so_texture: %p\n", data.textures.south.img);
+	printf("ea_texture: %p\n", data.textures.east.img);
+	printf("we_texture: %p\n", data.textures.west.img);
+#endif
+
+	if (get_map(&data, argv[1]) == FAIL)
+		return (EXIT_SUCCESS);
+
+#ifdef DEBUG
+	char **tmp;
+	int	i = -1;
+	tmp = data.map.map;
+	printf("%10s\n", "MAP");
+	if (tmp) {
+		printf("width: %d    height: %d\n", data.map.width,
+			data.map.height);
+		while (tmp[++i])
+			printf("|%s|\n", tmp[i]);
+		printf("posx: %f\nposy: %f\npl_direction: %c\n", data.player.posx,
+			data.player.posy, data.player.direct_view);
+	}
+#endif
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
 	mlx_loop_hook(data.mlx, render, &data);

@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   is_only_spaces.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 16:37:07 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/02 21:45:19 by ikael            ###   ########.fr       */
+/*   Created: 2021/11/02 08:25:06 by ikael             #+#    #+#             */
+/*   Updated: 2021/11/02 08:26:23 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int	is_only_spaces(char *line)
 {
-	size_t			i;
-	unsigned char	*str;
-	unsigned char	character;
+	int	i;
 
 	i = 0;
-	str = (unsigned char *)b;
-	character = c;
-	while (len > 0)
-	{
-		str[i] = character;
+	while (line[i] && line[i] == ' ')
 		i++;
-		len--;
-	}
-	return (b);
+	if (!line[i])
+		return (1);
+	return (0);
 }

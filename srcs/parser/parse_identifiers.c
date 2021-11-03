@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:26:24 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/29 20:18:48 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/02 21:08:40 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,27 @@ static int	get_color(char *color_part)
 	return (i);
 }
 
-static int	get_texture(void *mlx, t_texture *texture, char *texture_path)
+static int	get_texture(void *mlx,
+						t_texture *texture,
+						char *texture_path)
 {
+	if (texture->img)
+		return (FAIL);
 	texture->img = mlx_xpm_file_to_image(mlx, texture_path,
 			&texture->width, &texture->height);
 	if (!texture->img)
 		return (FAIL);
-	texture->path = ft_strdup(texture_path);
-	if (!texture_path)
-		return (FAIL);
 	return (SUCCESS);
 }
 
-static int	init_identifier(t_data *data, char **ln_prt, int8_t iter)
+static int	init_identifier(t_data *data,
+							char **ln_prt,
+							const uint8_t iter)
 {
 	int				color;
 	const t_texture	*texture[] = {
-		&data->textures.north,
-		&data->textures.south,
-		&data->textures.west,
-		&data->textures.east
+		&data->textures.north, &data->textures.south,
+		&data->textures.west, &data->textures.east
 	};
 
 	color = 0;
@@ -66,7 +67,7 @@ static int	init_identifier(t_data *data, char **ln_prt, int8_t iter)
 			return (FAIL);
 	if (iter == 4 || iter == 5)
 		color = get_color(ln_prt[1]);
-	if (color == -1)
+	if ((iter == 4 || iter == 5) && color == -1)
 		return (FAIL);
 	if (iter == 4)
 		data->map.f_color = color;
@@ -77,9 +78,9 @@ static int	init_identifier(t_data *data, char **ln_prt, int8_t iter)
 
 int	parse_identifiers(t_data *data, char **ln_prt)
 {
-	int				i;
-	int8_t			j;
-	const int8_t	identifiers_size = 6;
+	unsigned int	i;
+	uint8_t			j;
+	const uint8_t	ids_size = 6;
 	const char		*identifiers[] = {
 		"NO", "SO", "WE", "EA", "F", "C"
 	};
@@ -89,11 +90,14 @@ int	parse_identifiers(t_data *data, char **ln_prt)
 		i++;
 	if (i != 2)
 		return (FAIL);
-	j = -1;
-	while (++j < identifiers_size)
+	j = 0;
+	while (j < ids_size)
+	{
 		if (!ft_strcmp(identifiers[j], ln_prt[0]))
 			break ;
-	if (j == identifiers_size)
+		j++;
+	}
+	if (j == ids_size)
 		return (FAIL);
 	return (init_identifier(data, ln_prt, j));
 }

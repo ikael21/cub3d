@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   is_map_started.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 16:37:07 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/02 21:45:19 by ikael            ###   ########.fr       */
+/*   Created: 2021/10/31 18:57:42 by ikael             #+#    #+#             */
+/*   Updated: 2021/10/31 19:01:04 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int	is_map_started(char *line)
 {
-	size_t			i;
-	unsigned char	*str;
-	unsigned char	character;
+	int		i;
+	int8_t	is_ones;
 
+	is_ones = 0;
 	i = 0;
-	str = (unsigned char *)b;
-	character = c;
-	while (len > 0)
+	while (line[i] && (line[i] == ' ' || line[i] == '1'))
 	{
-		str[i] = character;
+		if (line[i] == '1')
+			is_ones = 1;
 		i++;
-		len--;
 	}
-	return (b);
+	if (!line[i] && is_ones)
+		return (1);
+	return (0);
 }

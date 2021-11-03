@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/30 21:51:09 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/03 19:50:20 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_player
 typedef struct s_texture
 {
 	void	*img; //парсер
-	char	*path; //парсер
 	int		width; //парсер
 	int		height; //парсер
 }	t_texture;
@@ -124,8 +123,12 @@ int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 /* PARSER */
-int		parser(t_data *data, char *map_path);
+int		get_map_identifiers(t_data *data, const char *map_path);
 int		parse_identifiers(t_data *data, char **ln_prt);
+int		get_map(t_data *data, const char *map_path);
+int		check_map(t_list *head);
+int		is_map_closed(char **map);
+int		build_map(t_data *data, t_list *head);
 
 /* CONTROL */
 int		key_hook_press(int keycode, void *params);
@@ -142,5 +145,10 @@ void	strafe_right(t_data *data);
 /* UTILS */
 void	free_str_arr(char **str_arr);
 int		rgb_to_hex(int red, int green, int blue);
+int		is_map_started(char *line);
+size_t	get_longest_line(t_list *head);
+size_t	get_map_size(t_list *head);
+int		is_extra(const unsigned char c);
+int		is_only_spaces(char *line);
 
 #endif
