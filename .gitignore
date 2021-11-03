@@ -5,3 +5,4 @@ CMakeLists.txt
 cmake-build-debug
 .idea
 checkLeaks.sh
+.DS_Store

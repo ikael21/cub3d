@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 21:07:57 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/03 23:17:24 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@
 # define MAGENTA	"\033[35;1m"
 
 // window size
-# define W_WIDTH 	1024
-# define W_HEIGHT	768
+# define W_WIDTH 	800
+# define W_HEIGHT	600
 
 // size of one cell
-#define SIZE		256
+# define SIZE		128
 
 //
-#define ROT_SPEED 2
-#define WALK_SPEED 10
-#define FOW 66.0
-#define H_FOW FOW/2
-#define DELTA_A FOW/W_WIDTH
-#define FOCUS (W_WIDTH/2)*tan(dtr(H_FOW))
+# define ROT_SPEED	4
+# define WALK_SPEED	15
+# define FOW 66.0
+# define H_FOW FOW/2
+# define DELTA_A FOW/W_WIDTH
+# define FOCUS (W_WIDTH/2)*tan(dtr(H_FOW))
 
 // keys
 # define W			13
@@ -70,8 +70,8 @@ typedef struct s_keys
 typedef struct s_player
 {
 	t_keys	keys;
-	double	posx; //парсер
-	double	posy; //парсер
+	double	posx;
+	double	posy;
 	double	angle;
 	char	direct_view;
 }	t_player;
@@ -79,32 +79,37 @@ typedef struct s_player
 /* STRUCT FOR ONE TEXTURE */
 typedef struct s_texture
 {
-	void	*img; //парсер
-	int		width; //парсер
-	int		height; //парсер
+	void	*img;
+	int		width;
+	int		height;
+	char	*addr;
+	int		bpp;
+	int		ll;
+	int		end;
 }	t_texture;
 
 /* STRUCT FOR ALL TEXTURES OF WALL */
 typedef struct s_textures
 {
-	t_texture	north; //парсер
-	t_texture	south; //парсер
-	t_texture	west; //парсер
-	t_texture	east; //парсер
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
 }	t_textures;
 
 /* STRUCT FOR MAP */
 typedef struct s_map
 {
-	char	**map; //парсер
-	int		width; //парсер
-	int		height; //парсер
+	char	**map;
+	int		width;
+	int		height;
 	int		f_color;
 	int		c_color;
 }	t_map;
 
 /* STRUCT FOR RENDER IMAGE */
-typedef struct	s_img {
+typedef struct s_img
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -112,16 +117,32 @@ typedef struct	s_img {
 	int		endian;
 }	t_img;
 
+/* STRUCT FOR RAY */
+typedef struct s_ray
+{
+	double		x;
+	double		y;
+	double		distance;
+	double		angle;
+	int			number;
+	int			height;
+	int			start;
+	int			end;
+	double		scale;
+	t_texture	texture;
+}	t_ray;
+
 /* MAIN STRUCT */
 typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
+	t_ray		ray;
 	t_img		img;
 	t_img		next;
-	t_player	player; //парсер
-	t_textures 	textures; //парсер
-	t_map		map; //парсер
+	t_player	player;
+	t_textures	textures;
+	t_map		map;
 }	t_data;
 
 /* GRAPHIC */
