@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:26:24 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/31 20:21:03 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/02 21:08:40 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ static int	get_color(char *color_part)
 	return (i);
 }
 
-static int	get_texture(void *mlx, t_texture *texture, char *texture_path)
+static int	get_texture(void *mlx,
+						t_texture *texture,
+						char *texture_path)
 {
 	if (texture->img)
 		return (FAIL);
@@ -45,20 +47,17 @@ static int	get_texture(void *mlx, t_texture *texture, char *texture_path)
 			&texture->width, &texture->height);
 	if (!texture->img)
 		return (FAIL);
-	texture->path = ft_strdup(texture_path);
-	if (!texture_path)
-		return (FAIL);
 	return (SUCCESS);
 }
 
-static int	init_identifier(t_data *data, char **ln_prt, int8_t iter)
+static int	init_identifier(t_data *data,
+							char **ln_prt,
+							const uint8_t iter)
 {
 	int				color;
 	const t_texture	*texture[] = {
-		&data->textures.north,
-		&data->textures.south,
-		&data->textures.west,
-		&data->textures.east
+		&data->textures.north, &data->textures.south,
+		&data->textures.west, &data->textures.east
 	};
 
 	color = 0;
@@ -79,9 +78,9 @@ static int	init_identifier(t_data *data, char **ln_prt, int8_t iter)
 
 int	parse_identifiers(t_data *data, char **ln_prt)
 {
-	int				i;
-	int8_t			j;
-	const int8_t	identifiers_size = 6;
+	unsigned int	i;
+	uint8_t			j;
+	const uint8_t	ids_size = 6;
 	const char		*identifiers[] = {
 		"NO", "SO", "WE", "EA", "F", "C"
 	};
@@ -91,11 +90,14 @@ int	parse_identifiers(t_data *data, char **ln_prt)
 		i++;
 	if (i != 2)
 		return (FAIL);
-	j = -1;
-	while (++j < identifiers_size)
+	j = 0;
+	while (j < ids_size)
+	{
 		if (!ft_strcmp(identifiers[j], ln_prt[0]))
 			break ;
-	if (j == identifiers_size)
+		j++;
+	}
+	if (j == ids_size)
 		return (FAIL);
 	return (init_identifier(data, ln_prt, j));
 }

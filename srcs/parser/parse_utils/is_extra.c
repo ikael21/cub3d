@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   is_extra.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 16:37:07 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/02 21:45:19 by ikael            ###   ########.fr       */
+/*   Created: 2021/11/02 08:09:25 by ikael             #+#    #+#             */
+/*   Updated: 2021/11/02 08:09:40 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+int	is_extra(const unsigned char c)
 {
-	size_t			i;
-	unsigned char	*str;
-	unsigned char	character;
-
-	i = 0;
-	str = (unsigned char *)b;
-	character = c;
-	while (len > 0)
+	int8_t				i;
+	const int8_t		map_ids_size = 7;
+	const unsigned char	map_ids[] =
 	{
-		str[i] = character;
-		i++;
-		len--;
-	}
-	return (b);
+		' ', '0', '1', 'N', 'S', 'E', 'W'
+	};
+
+	i = -1;
+	while (++i < map_ids_size)
+		if (map_ids[i] == c)
+			return (SUCCESS);
+	return (FAIL);
 }

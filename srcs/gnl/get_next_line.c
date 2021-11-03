@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 13:56:59 by ikael             #+#    #+#             */
-/*   Updated: 2021/10/27 09:47:01 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/02 00:04:04 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	creating_line(char *buf, char **line)
 static int	processing_buffer(int fd, char **line)
 {
 	static char	buf[BUFFER_SIZE + 1];
-	int			cr_value;
 	char		*temp;
 
 	if (length(buf) == 0)
@@ -64,10 +63,7 @@ static int	processing_buffer(int fd, char **line)
 	while (length(buf) > 0)
 	{
 		if (is_n_here(buf) > 0)
-		{
-			cr_value = creating_line(buf, &*line);
-			return (cr_value);
-		}
+			return (creating_line(buf, &*line));
 		temp = strjoin(*line, buf);
 		free(*line);
 		if (temp == NULL)
