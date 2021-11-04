@@ -41,7 +41,6 @@
 # define FOW 66.0
 # define H_FOW FOW/2
 # define DELTA_A FOW/W_WIDTH
-# define FOCUS (W_WIDTH/2)*tan(dtr(H_FOW))
 
 // keys
 # define W			13
@@ -122,6 +121,8 @@ typedef struct s_ray
 {
 	double		x;
 	double		y;
+	double		prevx;
+	double		prevy;
 	double		distance;
 	double		angle;
 	int			number;
@@ -137,6 +138,7 @@ typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
+	double		focus;
 	t_ray		ray;
 	t_img		img;
 	t_img		next;
