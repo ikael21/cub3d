@@ -13,20 +13,21 @@ SRCS =	srcs/control/close_game.c				srcs/control/turn_right.c\
 		srcs/parser/parse_utils/is_extra.c		srcs/parser/parse_utils/is_only_spaces.c\
 		srcs/parser/parse_utils/gll.c			srcs/parser/check_map.c\
 		srcs/parser/parse_utils/is_map_closed.c	srcs/graphic/dtr.c
-		
+
 MAIN = srcs/main.c
 
 LIBFT = srcs/libft/libft.a
+MLX = minilibx_macOS/libmlx.a
 
 OBJS = $(patsubst %.c,$(OBJS_DIR)/%.o, $(SRCS))
 D_FILES = $(patsubst %.c,$(OBJS_DIR)/%.d, $(SRCS))
 OBJS_DIR = objs
-
-MLX = minilibx_macOS/libmlx.a
+ALL_OBJS_DIRS = $(sort $(dir $(OBJS)))
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 MAC_API = -framework OpenGL -framework AppKit
+MLX_API = -Lminilibx_macOS -lmlx
 DEBUG = -g
 
 #colors for beauty
@@ -42,37 +43,33 @@ ERASE = \33[2K
 
 all: $(NAME)
 
-$(NAME): $(MLX) $(LIBFT) $(OBJS_DIR) $(OBJS) $(MAIN)
-	@$(CC) $(FLAGS) -Iincludes -Lminilibx_macOS -lmlx $(MAC_API) $(MAIN) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(MLX) $(LIBFT) $(ALL_OBJS_DIRS) $(OBJS) $(MAIN)
+	@$(CC) $(FLAGS) -Iincludes $(MLX_API) $(MAC_API) $(MAIN) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "\n$(MAGENTA)$(NAME) $(GREEN)compiled$(RESET)"
 
 $(LIBFT):
-	@make -C srcs/libft
+	@make -C $(dir $(LIBFT))
 
 $(MLX):
-	@make -C minilibx_macOS
+	@make -C $(dir $(MLX))
 	@echo "$(MAGENTA)mlx $(GREEN)ready$(RESET)"
+
+$(ALL_OBJS_DIRS): $(OBJS_DIR)
+	@mkdir -p $@
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
-	@mkdir -p $(OBJS_DIR)/srcs
-	@mkdir -p $(OBJS_DIR)/srcs/control
-	@mkdir -p $(OBJS_DIR)/srcs/graphic
-	@mkdir -p $(OBJS_DIR)/srcs/gnl
-	@mkdir -p $(OBJS_DIR)/srcs/utils
-	@mkdir -p $(OBJS_DIR)/srcs/parser
-	@mkdir -p $(OBJS_DIR)/srcs/parser/parse_utils
 
 $(OBJS_DIR)/%.o:%.c
-	@$(CC) $(FLAGS) -Iincludes -Iminilibx_macOS -c $< -o $@ -MD
+	@$(CC) $(FLAGS) -Iincludes -Iminilibx_macOS -c $< -o $@ -MMD
 	@printf "$(ERASE)$(RED)>> $(YELLOW)[$@]$(GREEN)$(RESET)\r"
 
 include $(wildcard $(D_FILES))
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@make clean -C minilibx_macOS
-	@make fclean -C srcs/libft
+	@make clean -C $(dir $(MLX))
+	@make fclean -C $(dir $(LIBFT))
 	@echo "$(MAGENTA)libmlx.a $(RED)deleted$(RESET)"
 	@echo "$(YELLOW)objs $(RED)deleted$(RESET)"
 
