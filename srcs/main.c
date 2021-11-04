@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 23:06:27 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/04 08:53:51 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ int	main(int argc, char **argv)
 		printf("width: %d    height: %d\n", data.map.width,
 			data.map.height);
 		while (tmp[++i])
-			printf("|%s|\n", tmp[i]);
-		printf("posx: %f\nposy: %f\npl_direction: %c\n", data.player.posx,
-			data.player.posy, data.player.direct_view);
+			printf(GREEN"|%s|\n"RESET, tmp[i]);
+		printf("posx: %f\nposy: %f\npl_direction: %c\n",
+			data.player.posx, data.player.posy, data.player.direct_view);
 	}
 #endif
 	player_set(&data);
-	
+
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
 	mlx_loop_hook(data.mlx, render, &data);

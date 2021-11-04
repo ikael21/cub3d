@@ -44,7 +44,7 @@ ERASE = \33[2K
 all: $(NAME)
 
 $(NAME): $(MLX) $(LIBFT) $(ALL_OBJS_DIRS) $(OBJS) $(MAIN)
-	@$(CC) $(FLAGS) -Iincludes $(MLX_API) $(MAC_API) $(MAIN) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(FLAGS) -D DEBUG -Iincludes $(MLX_API) $(MAC_API) $(MAIN) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "\n$(MAGENTA)$(NAME) $(GREEN)compiled$(RESET)"
 
 $(LIBFT):
