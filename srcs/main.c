@@ -44,6 +44,7 @@ static void	game_int(t_data *data)
 	data->map.f_color = -1;
 	data->map.c_color = -1;
 	data->map.map = NULL;
+	data->focus = (W_WIDTH/2)*tan(dtr(H_FOW));
 }
 
 static int	usage(void)
