@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 23:31:52 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 18:32:29 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 03:29:06 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static int	copy_map(char **map, t_list *head, size_t map_size)
 
 static void	init_player(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	**map;
 
 	map = data->map.map;

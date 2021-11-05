@@ -19,7 +19,6 @@ int key_hook_press(int keycode, void *params)
 		data->player.keys.right = 1;
 	if (keycode == ESC)
 		close_game();
-
 	return (1);
 }
 

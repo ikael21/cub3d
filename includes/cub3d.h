@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 23:17:24 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 02:38:57 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int		key_hook_press(int keycode, void *params);
 int		key_hook_release(int keycode, void *params);
 int		move(t_data *data);
 void	close_game(void);
+int		close_window(void *params);
 void	walk_forward(t_data *data);
 void	walk_backward(t_data *data);
 void	turn_left(t_data *data);

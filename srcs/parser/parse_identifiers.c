@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:26:24 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/02 21:08:40 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 03:31:11 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static int	get_texture(void *mlx,
 		return (FAIL);
 	texture->img = mlx_xpm_file_to_image(mlx, texture_path,
 			&texture->width, &texture->height);
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bpp, &texture->ll, &texture->end);
 	if (!texture->img)
+		return (FAIL);
+	texture->addr = mlx_get_data_addr(texture->img,
+			&texture->bpp, &texture->ll, &texture->end);
+	if (!texture->addr)
 		return (FAIL);
 	return (SUCCESS);
 }
@@ -69,6 +72,9 @@ static int	init_identifier(t_data *data,
 	if (iter == 4 || iter == 5)
 		color = get_color(ln_prt[1]);
 	if ((iter == 4 || iter == 5) && color == -1)
+		return (FAIL);
+	if ((iter == 4 && data->map.f_color != -1)
+		|| (iter == 5 && data->map.c_color != -1))
 		return (FAIL);
 	if (iter == 4)
 		data->map.f_color = color;

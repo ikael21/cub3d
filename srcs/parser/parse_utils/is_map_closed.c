@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 03:54:36 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/03 03:59:46 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 03:33:10 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static int	is_needed_char(char c)
 {
 	uint8_t			i;
 	const uint8_t	map_ids_size = 5;
-	const char		map_ids[] =
-	{
+	const char		map_ids[] = {
 		'0', 'N', 'S', 'W', 'E'
 	};
 

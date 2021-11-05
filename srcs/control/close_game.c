@@ -2,5 +2,12 @@
 
 void close_game(void)
 {
-	exit(0);
+	exit(EXIT_SUCCESS);
+}
+
+int	close_window(void *params)
+{
+	(void)params;
+	close_game();
+	return (EXIT_SUCCESS);
 }

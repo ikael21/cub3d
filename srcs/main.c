@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 11:09:13 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/04 08:53:51 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 02:08:56 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,11 @@ int	main(int argc, char **argv)
 			data.player.posx, data.player.posy, data.player.direct_view);
 	}
 #endif
-	player_set(&data);
 
+	player_set(&data);
 	mlx_hook(data.win, 2, 1L<<0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 1L<<1, key_hook_release, &data);
+	mlx_hook(data.win, 17, 0, close_window, NULL);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_loop(data.mlx);
 }
