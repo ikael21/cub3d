@@ -151,6 +151,11 @@ typedef struct s_data
 double	dtr(double degree);
 int		render(t_data *data);
 void	pixel_put(t_data *data, int x, int y, int color);
+void	draw_floor_and_cell(t_data *data);
+void	select_text(t_data *data);
+void	put_texture(t_data *data);
+void	calc_raypos(t_data *data);
+void	rays(t_data *data);
 
 /* PARSER */
 int		get_map_identifiers(t_data *data, const char *map_path);

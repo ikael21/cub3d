@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dtr.c                                              :+:      :+:    :+:   */
+/*   calc_raypos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvallie <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 20:02:38 by lvallie           #+#    #+#             */
-/*   Updated: 2021/11/05 20:02:40 by lvallie          ###   ########.fr       */
+/*   Created: 2021/11/05 20:13:35 by lvallie           #+#    #+#             */
+/*   Updated: 2021/11/05 20:13:37 by lvallie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include "cub3d.h"
 
-double	dtr(double degree)
+void	calc_raypos(t_data *data)
 {
-	return (degree * acos(-1.0) / 180);
+	data->ray.x = data->player.posx + data->ray.distance * cos(data->ray.angle);
+	data->ray.y = data->player.posy + data->ray.distance * sin(data->ray.angle);
 }
