@@ -14,23 +14,22 @@
 
 void	put_texture(t_data *data)
 {
-	double	tex_pos;
+	double	tex_posy;
+	char	direct;
 
 	data->ray.distance *= cos(data->player.angle - data->ray.angle);
 	data->ray.height = (int)(data->focus * SIZE / data->ray.distance);
 	data->ray.scale = 64 / (double)data->ray.height;
 	data->ray.start = (W_HEIGHT - data->ray.height) / 2;
 	data->ray.end = data->ray.start + data->ray.height;
-	tex_pos = 0;
-	select_text(data);
+	tex_posy = 0;
+	select_text(data, &direct);
 	while (data->ray.start < data->ray.end)
 	{
 		if (data->ray.start >= 0 && data->ray.start < W_HEIGHT
-			&& data->ray.number >= 0 && data->ray.number < W_WIDTH)
-			pixel_put(data, data->ray.number, data->ray.start,
-				  *(int *)(data->ray.texture.addr
-					  + (int)tex_pos * (data->ray.texture.bpp / 8)));
-		tex_pos += data->ray.scale;
+		&& data->ray.number >= 0 && data->ray.number < W_WIDTH)
+			pixel_put(data, data->ray.number, data->ray.start, select_color(data, tex_posy, direct));
+		tex_posy += data->ray.scale;
 		data->ray.start++;
 	}
 }
