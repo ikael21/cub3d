@@ -33,6 +33,6 @@ void	rays(t_data *data)
 			data->ray.prevy = data->ray.y;
 		}
 		data->ray.number++;
-		data->ray.angle += dtr(DELTA_A);
+		data->ray.angle += dtr(data->delta_a);
 	}
 }
