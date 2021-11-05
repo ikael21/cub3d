@@ -39,8 +39,6 @@
 # define ROT_SPEED	4
 # define WALK_SPEED	15
 # define FOW 66.0
-# define H_FOW FOW/2
-# define DELTA_A FOW/W_WIDTH
 
 // keys
 # define W			13
@@ -139,6 +137,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	double		focus;
+	double		h_fow;
+	double		delta_a;
 	t_ray		ray;
 	t_img		img;
 	t_img		next;

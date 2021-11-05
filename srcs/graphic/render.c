@@ -14,7 +14,7 @@
 
 void	raycasting(t_data *data)
 {
-	data->ray.angle = data->player.angle - dtr(H_FOW);
+	data->ray.angle = data->player.angle - dtr(data->h_fow);
 	data->ray.number = 0;
 	data->ray.prevx = 0;
 	data->ray.prevy = 0;

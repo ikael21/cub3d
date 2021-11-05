@@ -23,12 +23,14 @@ void	put_texture(t_data *data)
 	data->ray.start = (W_HEIGHT - data->ray.height) / 2;
 	data->ray.end = data->ray.start + data->ray.height;
 	tex_posy = 0;
+	direct = 'h';
 	select_text(data, &direct);
 	while (data->ray.start < data->ray.end)
 	{
 		if (data->ray.start >= 0 && data->ray.start < W_HEIGHT
-		&& data->ray.number >= 0 && data->ray.number < W_WIDTH)
-			pixel_put(data, data->ray.number, data->ray.start, select_color(data, tex_posy, direct));
+			&& data->ray.number >= 0 && data->ray.number < W_WIDTH)
+			pixel_put(data, data->ray.number, data->ray.start,
+				  select_color(data, tex_posy, direct));
 		tex_posy += data->ray.scale;
 		data->ray.start++;
 	}
