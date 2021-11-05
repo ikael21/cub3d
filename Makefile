@@ -13,7 +13,10 @@ SRCS =	srcs/control/close_game.c				srcs/control/turn_right.c\
 		srcs/parser/parse_utils/is_extra.c		srcs/parser/parse_utils/is_only_spaces.c\
 		srcs/parser/parse_utils/gll.c			srcs/parser/check_map.c\
 		srcs/parser/parse_utils/is_map_closed.c	srcs/graphic/dtr.c\
-		srcs/parser/parse_utils/save_line.c		srcs/parser/parse_utils/fucked_up_clear.c
+		srcs/parser/parse_utils/save_line.c		srcs/parser/parse_utils/fucked_up_clear.c\
+		srcs/graphic/draw_floor_and_cell.c		srcs/graphic/calc_raypos.c\
+		srcs/graphic/put_texture.c				srcs/graphic/rays.c\
+		srcs/graphic/select_text.c
 
 MAIN = srcs/main.c
 
