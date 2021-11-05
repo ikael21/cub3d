@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lvallie <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/05 22:39:01 by lvallie           #+#    #+#             */
+/*   Updated: 2021/11/05 22:39:02 by lvallie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int key_hook_press(int keycode, void *params)
+int	key_hook_press(int keycode, void *params)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)params;
 	if (keycode == W)
@@ -22,9 +34,9 @@ int key_hook_press(int keycode, void *params)
 	return (1);
 }
 
-int key_hook_release(int keycode, void *params)
+int	key_hook_release(int keycode, void *params)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = (t_data *)params;
 	if (keycode == W)
@@ -41,6 +53,5 @@ int key_hook_release(int keycode, void *params)
 		data->player.keys.right = 0;
 	if (keycode == ESC)
 		close_game();
-
 	return (1);
 }
