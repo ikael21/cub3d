@@ -1,7 +1,8 @@
 .vscode
 CMakeLists.txt
-*.o
 *.a
+objs
+objs_and_dfiles
 cmake-build-debug
 .idea
 checkLeaks.sh

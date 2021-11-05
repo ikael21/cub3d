@@ -6,31 +6,11 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 18:39:15 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/05 03:30:39 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 04:29:05 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	*fucked_up_clear(t_list **head, char *str)
-{
-	if (head)
-		ft_lstclear(head, free);
-	if (str)
-		free(str);
-	return (NULL);
-}
-
-static int	save_line(t_list **head, char *line)
-{
-	t_list	*new;
-
-	new = ft_lstnew(line);
-	if (new == NULL)
-		return (FAIL);
-	ft_lstadd_back(head, new);
-	return (SUCCESS);
-}
 
 static t_list	*read_map(int map_fd, char *last_line)
 {

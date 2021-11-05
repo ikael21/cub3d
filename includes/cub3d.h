@@ -6,7 +6,7 @@
 /*   By: ikael <ikael@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 10:40:39 by ikael             #+#    #+#             */
-/*   Updated: 2021/11/05 02:38:57 by ikael            ###   ########.fr       */
+/*   Updated: 2021/11/05 04:29:28 by ikael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ void	strafe_left(t_data *data);
 void	strafe_right(t_data *data);
 
 /* UTILS */
+void	*fucked_up_clear(t_list **head, char *str);
+int		save_line(t_list **head, char *line);
 void	free_str_arr(char **str_arr);
 int		rgb_to_hex(int red, int green, int blue);
 int		is_map_started(char *line);

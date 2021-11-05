@@ -12,7 +12,8 @@ SRCS =	srcs/control/close_game.c				srcs/control/turn_right.c\
 		srcs/parser/get_map.c					srcs/parser/build_map.c\
 		srcs/parser/parse_utils/is_extra.c		srcs/parser/parse_utils/is_only_spaces.c\
 		srcs/parser/parse_utils/gll.c			srcs/parser/check_map.c\
-		srcs/parser/parse_utils/is_map_closed.c	srcs/graphic/dtr.c
+		srcs/parser/parse_utils/is_map_closed.c	srcs/graphic/dtr.c\
+		srcs/parser/parse_utils/save_line.c		srcs/parser/parse_utils/fucked_up_clear.c
 
 MAIN = srcs/main.c
 
