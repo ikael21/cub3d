@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	select_text(t_data *data)
+void	select_text(t_data *data, char *direct)
 {
 	if ((int)(data->ray.prevy / SIZE) == (int)(data->ray.y / SIZE))
 	{
@@ -20,6 +20,7 @@ void	select_text(t_data *data)
 			data->ray.texture = data->textures.west;
 		else
 			data->ray.texture = data->textures.east;
+		*direct = 'v';
 	}
 	else if ((int)(data->ray.prevx / SIZE) == (int)(data->ray.x / SIZE))
 	{
@@ -27,5 +28,6 @@ void	select_text(t_data *data)
 			data->ray.texture = data->textures.north;
 		else
 			data->ray.texture = data->textures.south;
+		*direct = 'h';
 	}
 }
